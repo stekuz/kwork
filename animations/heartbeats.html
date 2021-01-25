@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <canvas width="400" height="400" style="position:fixed;top:20%;left:20%"></canvas>
+        <script>
+            const ctx=document.getElementsByTagName('canvas')[0].getContext('2d');
+            const img=new Image();img.src='heart.png';
+            let x=0,y=0,w=400,h=400,s=0;
+            ctx.fillStyle='#ffffff';
+            function draw(){
+                ctx.fillRect(0,0,400,400);
+                if(x<199&&s===0){
+                    ctx.drawImage(img,x,y,w,h);
+                    x++;y++;w-=2;h-=2;
+                    return;
+                }
+                s=1;
+                if(x>0&&x<200&&s===1){
+                    ctx.drawImage(img,x,y,w,h);
+                    x--;y--;w+=2;h+=2;
+                    return;
+                }
+                ctx.drawImage(img,x,y,w,h);
+                s=0;
+            }
+            setInterval(draw);
+            setInterval(draw);
+        </script>
+    </body>
+</html>

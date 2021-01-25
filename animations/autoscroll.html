@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .scroll{
+                background-color: #e5b6e588;
+                position: fixed;
+                border: #d610b5 3px ridge;
+                border-radius: 20px;
+                top: 10%;
+                left: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas class="scroll" width="1000" height="100"></canvas>
+        <script>
+            const ctx=document.querySelector('.scroll').getContext('2d');
+            document.addEventListener('click',Draw);
+            const img=new Image();img.src='https://saveus.web4net.ru/assets/images/p-1.png';
+            const blocks=[];
+            class Block{
+                constructor(img,id,x,y){
+                    this.img=img;
+                    this.id=id;
+                    this.x=x;
+                    this.y=y;
+                }
+                move(x,y){
+                    this.x+=x;
+                    this.y+=y;
+                }
+            }
+            for(let i=0;i<5;i++)blocks.push(new Block(img,i,i*200,23));blocks.push(new Block(img,5,1001,23));
+            function Draw(c){
+                ctx.fillRect(0,0,1000,100);
+                blocks.forEach(block=>{
+                    if(c!==undefined)if(c.offsetX>=block.x&&c.offsetX<=block.x+120&&c.offsetY>=block.y&&c.offsetY<=block.y+53)location.href='https://google.com';
+                    if(block.x>880&&block.id!==5){
+                        blocks[5].x=block.x;
+                        block.x=-120;
+                    }
+                    ctx.drawImage(block.img,block.x,block.y);
+                    block.move(1,0);
+                });
+            }
+            const draw=setInterval(Draw,20);
+        </script>
+    </body>
+</html>
