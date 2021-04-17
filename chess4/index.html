@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            
-        </style>
+        <meta charset="utf-8">
     </head>
     <body>
-        <
+        <canvas></canvas>
+        <script>
+const
+    conds={
+        d:200,
+        r:{
+            p:[0,0],
+            k:[200,0],
+            b:[400,0],
+            r:[600,0],
+            q:[800,0],
+            k:[1000,0]
+        },
+        g:{
+            p:[0,200],
+            k:[200,200],
+            b:[400,200],
+            r:[600,200],
+            q:[800,200],
+            k:[1000,200]
+        },
+        b:{
+            p:[0,400],
+            k:[200,400],
+            b:[400,400],
+            r:[600,400],
+            q:[800,400],
+            k:[1000,400]
+        },
+        y:{
+            p:[0,600],
+            k:[200,600],
+            b:[400,600],
+            r:[600,600],
+            q:[800,600],
+            k:[1000,600]
+        }
+    },
+    width=window.screen.width,
+    height=window.screen.height,
+    canvas=document.getElementsByTagName('canvas')[0],
+    board=new Image(),
+    pieces=new Image(),
+    ctx=canvas.getContext('2d');
+if(width>height)conds.scale=height/2800;
+else conds.scale=width/2800;
+board.src='file:///C:/Users/user/documents/chess4/images/board.png';
+pieces.src='file:///C:/Users/user/documents/chess4/images/pieces.png';
+canvas.width=width;
+canvas.height=height;
+setInterval(()=>{
+    ctx.drawImage(board,0,0,conds.scale*2800,conds.scale*2800);
+    
+});
+        </script>
     </body>
 </html>
