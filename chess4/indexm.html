@@ -7,14 +7,24 @@
                 left:0%;
                 right:0%;
             }
+            div{
+                position:fixed;
+                bottom:5%;
+                left:5%;
+            }
+            button{
+                font-size:50px;
+            }
         </style>
         <meta charset="utf-8">
     </head>
     <body>
         <a></a>
         <canvas></canvas>
-        <button ontouchstart="redo(-1)"><<<</button>
-        <button ontouchstart="redo(1)">>>></button>
+        <div>
+            <button ontouchstart="redo(-1)"><<<</button>
+            <button ontouchstart="redo(1)">>>></button>
+        </div>
         <script>
 const
     d=200,
