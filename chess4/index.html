@@ -103,6 +103,7 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
         c=game.st[game.cs],
         t=c[tx][ty][2],
         f=c[fx][fy][2];
+    let tr=false;
     game.f=[];
     switch(f[1]){
         case 0://король
@@ -175,15 +176,19 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
             switch(f[0]){
                 case 0:
                     if((ty+2!==fy||tx!==fx)&&(ty+1!==fy||tx!==fx+1&&tx!==fx-1&&tx!==fx)||ty+2===fy&&fy!==12||(ty+1===fy&&tx===fx||ty+2===fy)&&t[0]!==undefined||ty+2===fy&&c[tx][ty+1][2][0]!==undefined||(ty+1===fy&&(tx+1===fx||tx-1===fx))&&(t[0]===undefined||t[0]===f[0]))return;
+                    if(ty===6)tr=true;
                     break;
                 case 1:
                     if((tx-2!==fx||ty!==fy)&&(tx-1!==fx||ty!==fy+1&&ty!==fy-1&&ty!==fy)||tx-2===fx&&fx!==1||(tx-1===fx&&ty===fy||tx-2===fx)&&t[0]!==undefined||tx-2===fx&&c[tx-1][ty][2][0]!==undefined||(tx-1===fx&&(ty+1===fy||ty-1===fy))&&(t[0]===undefined||t[0]===f[0]))return;
+                    if(tx===7)tr=true;
                     break;
                 case 2:
                     if((ty-2!==fy||tx!==fx)&&(ty-1!==fy||tx!==fx+1&&tx!==fx-1&&tx!==fx)||ty-2===fy&&fy!==1||(ty-1===fy&&tx===fx||ty-2===fy)&&t[0]!==undefined||ty-2===fy&&c[tx][ty-1][2][0]!==undefined||(ty-1===fy&&(tx+1===fx||tx-1===fx))&&(t[0]===undefined||t[0]===f[0]))return;
+                    if(ty===7)tr=true;
                     break;
                 case 3:
                     if((tx+2!==fx||ty!==fy)&&(tx+1!==fx||ty!==fy+1&&ty!==fy-1&&ty!==fy)||tx+2===fx&&fx!==12||(tx+1===fx&&ty===fy||tx+2===fx)&&t[0]!==undefined||tx+2===fx&&c[tx+1][ty][2][0]!==undefined||(tx+1===fx&&(ty+1===fy||ty-1===fy))&&(t[0]===undefined||t[0]===f[0]))return;
+                    if(tx===6)tr=true;
                     break;
             }
             break;
@@ -206,6 +211,7 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
         }
     }
     game.st[a][tx][ty][2]=game.st[a][fx][fy][2];
+    if(tr)game.st[a][tx][ty][2][1]=1;
     game.st[a][fx][fy][2]=[];
 }
 
