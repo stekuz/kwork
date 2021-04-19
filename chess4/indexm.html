@@ -144,6 +144,7 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
                 case 3:
                     break;
             }
+            e=true;
             break;
         case 2://слон
             if(t[1]===-1)return;
@@ -157,6 +158,7 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
                 case 3:
                     break;
             }
+            e=true;
             break;
         case 3://конь
             if(t[1]===-1)return;
@@ -170,6 +172,7 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
                 case 3:
                     break;
             }
+            e=true;
             break;
         case 4://ладья
             if(t[1]===-1)return;
@@ -183,6 +186,7 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
                 case 3:
                     break;
             }
+            e=true;
             break;
         case 5://пешка
             if(t[1]===-1)return;
@@ -204,6 +208,7 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
                     if(tx===6)tr=true;
                     break;
             }
+            e=true;
             break;
     }
     game.m++;
@@ -220,6 +225,13 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
             for(let i=0;i<2;i++){
                 game.st[a][x][y][i]=game.st[a-1][x][y][i];
                 if(game.st[a-1][x][y][2][0]!==undefined)game.st[a][x][y][2][i]=game.st[a-1][x][y][2][i];
+            }
+        }
+    }
+    if(e){
+        for(let x=0;x<14;x++){
+            for(let y=0;y<14;y++){
+                if(game.st[a][x][y][2][0]===t[0])game.st[a][x][y][2]=[];
             }
         }
     }
