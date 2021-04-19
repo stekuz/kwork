@@ -93,8 +93,8 @@ function Focus(evt){
     evt.preventDefault();
     const
         e=evt.changedTouches[0],
-        x=Math.floor(e.offsetX*5/game.bs),
-        y=Math.floor(e.offsetY*5/game.bs),
+        x=Math.floor(e.clientX*5/game.bs),
+        y=Math.floor(e.clientY*5/game.bs),
         c=game.st[game.cs][x][y];
     if(c[2][0]===game.m)game.f=[c[0],c[1],x,y];
     else if(game.f[0]!==undefined)move(game.f[2],game.f[3],x,y);
