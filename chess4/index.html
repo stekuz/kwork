@@ -104,24 +104,31 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
         c=game.st[game.cs],
         t=c[tx][ty][2],
         f=c[fx][fy][2];
-    let tr=false,e=false;
+    let tr=false,e=false,l=-1,s=-1;//превращение конец длинная короткая
     game.f=[];
+    if(t[1]===-1)return;
     switch(f[1]){
         case 0://король
-            if(t[1]===-1)return;
             switch(f[0]){
                 case 0:
+                    if(tx===fx+2)s=0;
+                    if(tx===fx-2)l=0;
                     break;
                 case 1:
+                    if(ty===fy+2)s=1;
+                    if(ty===fy-2)l=1;
                     break;
                 case 2:
+                    if(tx===fx-2)s=2;
+                    if(tx===fx+2)l=2;
                     break;
                 case 3:
+                    if(ty===fy-2)s=3;
+                    if(ty===fy+2)l=3;
                     break;
             }
             break;
         case 1://ферзь
-            if(t[1]===-1)return;
             switch(f[0]){
                 case 0:
                     break;
@@ -135,7 +142,6 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
             if(t[1]===0)e=true;
             break;
         case 2://слон
-            if(t[1]===-1)return;
             switch(f[0]){
                 case 0:
                     break;
@@ -149,7 +155,6 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
             if(t[1]===0)e=true;
             break;
         case 3://конь
-            if(t[1]===-1)return;
             switch(f[0]){
                 case 0:
                     break;
@@ -163,7 +168,6 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
             if(t[1]===0)e=true;
             break;
         case 4://ладья
-            if(t[1]===-1)return;
             switch(f[0]){
                 case 0:
                     break;
@@ -177,7 +181,6 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
             if(t[1]===0)e=true;
             break;
         case 5://пешка
-            if(t[1]===-1)return;
             switch(f[0]){
                 case 0:
                     if((ty+2!==fy||tx!==fx)&&(ty+1!==fy||tx!==fx+1&&tx!==fx-1&&tx!==fx)||ty+2===fy&&fy!==12||(ty+1===fy&&tx===fx||ty+2===fy)&&t[0]!==undefined||ty+2===fy&&c[tx][ty+1][2][0]!==undefined||(ty+1===fy&&(tx+1===fx||tx-1===fx))&&(t[0]===undefined||t[0]===f[0]))return;
@@ -224,6 +227,44 @@ function move(fx,fy,tx,ty){//от х,у, до х,у
     }
     game.st[a][tx][ty][2]=game.st[a][fx][fy][2];
     if(tr)game.st[a][tx][ty][2][1]=1;
+    switch(l){
+        case -1:break;
+        case 0:
+            game.st[a][tx+1][ty][2]=game.st[a][3][13][2];
+            game.st[a][3][13][2]=[];
+            break;
+        case 1:
+            game.st[a][tx][ty+1][2]=game.st[a][0][3][2];
+            game.st[a][0][3][2]=[];
+            break;
+        case 2:
+            game.st[a][tx-1][ty][2]=game.st[a][10][0][2];
+            game.st[a][10][0][2]=[];
+            break;
+        case 3:
+            game.st[a][tx][ty-1][2]=game.st[a][13][10][2];
+            game.st[a][13][10][2]=[];
+            break;
+    }
+    switch(s){
+        case -1:break;
+        case 0:
+            game.st[a][tx-1][ty][2]=game.st[a][10][13][2];
+            game.st[a][10][13][2]=[];
+            break;
+        case 1:
+            game.st[a][tx][ty-1][2]=game.st[a][0][10][2];
+            game.st[a][0][10][2]=[];
+            break;
+        case 2:
+            game.st[a][tx+1][ty][2]=game.st[a][3][0][2];
+            game.st[a][3][0][2]=[];
+            break;
+        case 3:
+            game.st[a][tx][ty+1][2]=game.st[a][13][3][2];
+            game.st[a][13][3][2]=[];
+            break;
+    }
     game.st[a][fx][fy][2]=[];
     game.m++;
     if(game.m>game.pl.length-1)game.m=0;
